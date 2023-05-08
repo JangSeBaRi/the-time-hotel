@@ -30,7 +30,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="w-full h-screen flex flex-col items-center pt-[150px] px-5">
-                <div className=" bg-white p-7 rounded-xl flex flex-col w-full max-w-[380px] 300px:p-10">
+                <div className=" bg-white p-7 rounded-xl flex flex-col w-full max-w-[450px] 300px:p-10">
                     <div className="flex items-center justify-center">
                         <div className="w-[250px]">
                             <Image
