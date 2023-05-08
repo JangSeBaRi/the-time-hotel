@@ -41,7 +41,7 @@ const SignUp = () => {
                     </Link>
                 </div>
             </header>
-            <div className=" w-full h-screen flex flex-col items-center pt-[150px] px-5">
+            <div className=" w-full h-screen flex flex-col items-center 600px:pt-[150px] max-600px:justify-center pb-[30px] px-5">
                 <div
                     className=" bg-white p-10 rounded-xl flex flex-col w-full max-w-[550px]"
                 >
