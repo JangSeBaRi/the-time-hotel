@@ -29,8 +29,7 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="w-full h-screen flex flex-col items-center pt-[150px] px-5
-            ">
+            <div className="w-full h-screen flex flex-col items-center pt-[150px] px-5">
                 <div className=" bg-white p-7 rounded-xl flex flex-col w-full max-w-[380px] 300px:p-10">
                     <div className="flex items-center justify-center">
                         <div className="w-[250px]">
@@ -46,7 +45,13 @@ export default function Home() {
                         </div>
                     </div>
                     <p className=" text-[#999] text-[10px] text-center">더 타임 호텔 관리자 계정에 로그인 해주세요.</p>
-                    <TextInput label="아이디" value={id} onChange={handleChangeId} marginTop={30} alertMsg={idAlertMsg} />
+                    <TextInput
+                        label="아이디"
+                        value={id}
+                        onChange={handleChangeId}
+                        marginTop={30}
+                        alertMsg={idAlertMsg}
+                    />
                     <TextInput
                         inputType="password"
                         label="비밀번호"
