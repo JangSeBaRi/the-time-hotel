@@ -59,7 +59,7 @@ const SignUp = () => {
                     </Link>
                 </div>
             </header>
-            <div className=" w-full h-screen flex flex-col items-center justify-center pb-[25vh] px-5">
+            <div className=" w-full h-screen flex flex-col items-center justify-center pb-[25vh] px-5 duration-150">
                 <div className=" bg-white p-10 rounded-xl flex flex-col w-full max-w-[550px] relative z-[1]">
                     <TextInput label="아이디" value={id} onChange={handleChangeId} alertMsg={idAlertMsg} />
                     <div className="flex flex-wrap gap-1">
