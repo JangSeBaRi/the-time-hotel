@@ -11,6 +11,7 @@ import Link from "next/link";
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+    console.log(process.env.NEXT_PUBLIC_ENV);
     const [id, setId] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [idAlertMsg, setIdAlertMsg] = useState<string>("");
@@ -25,7 +26,7 @@ export default function Home() {
     return (
         <>
             <Head>
-                <title>The Time Hotel</title>
+                <title>더 타임 호텔</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
