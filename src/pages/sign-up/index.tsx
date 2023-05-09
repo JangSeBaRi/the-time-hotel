@@ -44,7 +44,7 @@ const SignUp = () => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <header className=" fixed w-full z-[0]">
+            <header className=" fixed w-full z-[1]">
                 <div className="pt-[15px] pl-[15px]">
                     <Link className="w-[180px] inline-block" href="/">
                         <Image
@@ -59,8 +59,8 @@ const SignUp = () => {
                     </Link>
                 </div>
             </header>
-            <div className=" w-full h-screen flex flex-col items-center justify-center pb-[25vh] px-5 relative z-[0]">
-                <div className=" bg-white p-10 rounded-xl flex flex-col w-full max-w-[550px]">
+            <div className=" w-full h-screen flex flex-col items-center justify-center pb-[25vh] px-5">
+                <div className=" bg-white p-10 rounded-xl flex flex-col w-full max-w-[550px] relative z-[1]">
                     <TextInput label="아이디" value={id} onChange={handleChangeId} alertMsg={idAlertMsg} />
                     <div className="flex flex-wrap gap-1">
                         <div className="grow basis-0 min-w-[150px]">
