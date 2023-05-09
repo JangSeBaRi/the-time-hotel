@@ -56,7 +56,7 @@ const TextInput = ({ inputType = "text", label, value, onChange, alertMsg, margi
                 )}
                 {inputType === "password" && value && (
                     <a
-                        className="absolute right-[11px] top-[3px] text-[#ccc] text-[18px]"
+                        className="absolute right-[11px] top-[4px] text-[#ccc] text-[18px]"
                         onClick={handleClickVisibilitylinedIcon}
                     >
                         {isMasking ? (

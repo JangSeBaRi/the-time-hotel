@@ -1,3 +1,4 @@
+import SelectBox, { selectOption } from "@/components/selectBox";
 import TextInput from "@/components/textInput";
 import Head from "next/head";
 import Image from "next/image";
@@ -10,6 +11,19 @@ const SignUp = () => {
     const [passwordCheck, setPasswordCheck] = useState<string>("");
     const [idAlertMsg, setIdAlertMsg] = useState<string>("");
     const [passwordAlertMsg, setPasswordAlertMsg] = useState<string>("");
+    const [mcTypeOptions, setMcTypeOptions] = useState<selectOption[]>([
+        {
+            id: "main",
+            label: "메인강사",
+            select: false,
+        },
+        {
+            id: "sub",
+            label: "보조강사",
+            select: false,
+        },
+    ]);
+
     const handleChangeId = (v: string) => {
         setId(v);
     };
@@ -19,6 +33,10 @@ const SignUp = () => {
     const handleChangePasswordCheck = (v: string) => {
         setPasswordCheck(v);
     };
+    const handleChangeMycTypeOptions = (v: selectOption[]) => {
+        setMcTypeOptions(v);
+    };
+
     return (
         <>
             <Head>
@@ -26,7 +44,7 @@ const SignUp = () => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <header className=" fixed w-full">
+            <header className=" fixed w-full z-[0]">
                 <div className="pt-[15px] pl-[15px]">
                     <Link className="w-[180px] inline-block" href="/">
                         <Image
@@ -41,10 +59,8 @@ const SignUp = () => {
                     </Link>
                 </div>
             </header>
-            <div className=" w-full h-screen flex flex-col items-center 600px:pt-[150px] max-600px:justify-center pb-[30px] px-5">
-                <div
-                    className=" bg-white p-10 rounded-xl flex flex-col w-full max-w-[550px]"
-                >
+            <div className=" w-full h-screen flex flex-col items-center justify-center pb-[25vh] px-5 relative z-[0]">
+                <div className=" bg-white p-10 rounded-xl flex flex-col w-full max-w-[550px]">
                     <TextInput label="아이디" value={id} onChange={handleChangeId} alertMsg={idAlertMsg} />
                     <div className="flex flex-wrap gap-1">
                         <div className="grow basis-0 min-w-[150px]">
@@ -67,6 +83,7 @@ const SignUp = () => {
                             />
                         </div>
                     </div>
+                    <SelectBox selectBoxLabel="강사선택" selectOptions={mcTypeOptions} marginTop={10} onChange={handleChangeMycTypeOptions} />
                     <a className="mt-[10px] bg-amber-300 text-center rounded-[5px] text-[12px] py-2 hover:bg-amber-400 duration-300 text-[#3A1D1D]">
                         회원가입
                     </a>
