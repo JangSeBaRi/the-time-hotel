@@ -57,6 +57,7 @@ const SignIn = () => {
                         },
                     ],
                 })
+                router.push("/hotel-list");
             } catch (error: any) {
                 if (error.code === "auth/user-not-found") {
                     setErrorMsg("가입된 메일이 없습니다. 이메일을 확인해주세요.");

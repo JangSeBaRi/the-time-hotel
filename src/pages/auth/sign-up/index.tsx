@@ -89,7 +89,7 @@ const SignUp = () => {
                     btnList: [
                         {
                             title: "확인",
-                            // func: () => router.push("/auth/sign-in"),
+                            func: () => router.push("/auth/sign-in"),
                         },
                     ],
                 });

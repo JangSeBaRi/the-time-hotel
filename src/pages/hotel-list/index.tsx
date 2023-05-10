@@ -18,6 +18,7 @@ const HotelList = () => {
                 },
             ],
         });
+        router.push("/auth/sign-in");
         // await router.push(`/?returnUrl=${router.asPath}`);
     };
     return (
