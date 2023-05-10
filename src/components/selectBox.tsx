@@ -44,7 +44,7 @@ const SelectBox = ({ selectBoxLabel, selectOptions, onChange, marginTop }: Props
                 {openSelectBox && (
                     <div
                         id="bottom_modal_background"
-                        className="fixed left-0 top-0 w-full h-screen bg-black/50 z-[999]"
+                        className="fixed left-0 top-0 w-full h-screen bg-black/70 z-[999]"
                         onClick={() => setOpenSelectBox(false)}
                     />
                 )}

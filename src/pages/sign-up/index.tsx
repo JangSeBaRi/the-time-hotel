@@ -1,16 +1,19 @@
 import SelectBox, { selectOption } from "@/components/selectBox";
 import TextInput from "@/components/textInput";
 import { addData, signupEmail, updateUserProfile } from "@/firebase";
-import { loadingRecoil } from "@/recoil/states";
+import { loadingRecoil, modalPropsRecoil } from "@/recoil/states";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
+import { useRouter } from "next/router";
 
 const SignUp = () => {
     const setLoading = useSetRecoilState(loadingRecoil);
+    const setModalProps = useSetRecoilState(modalPropsRecoil);
+    const router = useRouter();
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -90,9 +93,21 @@ const SignUp = () => {
                     mcType: getMcType()!!,
                     photoURL: createUser.user.photoURL,
                 });
+                setModalProps({
+                    title: "회원가입",
+                    subTitleList: ["축하드립니다. 더 타임 호텔의 관리자가 되셨습니다.", "로그인 해주세요."],
+                    btnList: [
+                        {
+                            title: "확인",
+                            func: () => router.push("/"),
+                        },
+                    ],
+                });
             } catch (error: any) {
                 if (error.code === "auth/email-already-in-use") {
                     setErrorMsg("이미 가입 된 이메일입니다.");
+                } if (error.code === "auth/invalid-email") {
+                    setErrorMsg("이메일이 형식에 맞지않습니다.");
                 } else {
                     alert(error);
                 }
