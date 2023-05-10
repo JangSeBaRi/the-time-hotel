@@ -8,11 +8,11 @@ interface Props {
     label: string;
     value: string;
     onChange: (e: string) => void;
+    onKeyDown?: (code: string) => void;
     marginTop?: number;
-    alertMsg?: string;
 }
 
-const TextInput = ({ inputType = "text", label, value, onChange, alertMsg, marginTop }: Props) => {
+const TextInput = ({ inputType = "text", label, value, onChange, onKeyDown, marginTop }: Props) => {
     const [isMasking, setIsMasking] = useState<boolean>(true);
     const handleClickLabel = (e: React.MouseEvent<HTMLElement>) => {
         (e.currentTarget.previousSibling as HTMLInputElement).focus();
@@ -33,6 +33,9 @@ const TextInput = ({ inputType = "text", label, value, onChange, alertMsg, margi
                     type={isMasking ? inputType : "text"}
                     value={value}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.currentTarget.value)}
+                    onKeyDown={(e) => {
+                        onKeyDown && e.nativeEvent.isComposing === false && onKeyDown(e.code);
+                    }}
                 />
                 <span
                     className="absolute z-[1] left-[11px] px-1 duration-200 text-[#999] peer-focus/input:text-amber-300 select-none cursor-text"
@@ -67,7 +70,6 @@ const TextInput = ({ inputType = "text", label, value, onChange, alertMsg, margi
                     </a>
                 )}
             </div>
-            {alertMsg && <p className="pl-[13px] text-[10px] text-red-400">{alertMsg}</p>}
         </>
     );
 };

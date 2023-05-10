@@ -51,7 +51,7 @@ const SelectBox = ({ selectBoxLabel, selectOptions, onChange, marginTop }: Props
                 <div
                     id="bottom_modal_wrap"
                     className="fixed left-0 bg-white w-full h-[25vh] rounded-tl-2xl rounded-tr-2xl border-t-[1px] z-[1000] duration-300"
-                    style={{ bottom: openSelectBox ? 0 : "-25vh" }}
+                    style={{ bottom: openSelectBox ? -2 : "-25vh" }}
                 >
                     <div className="relative">
                         <div className="absolute top-0 left-[16px] bg-white flex items-center justify-center w-[calc(100vw-32px)] h-[16px] z-[1]">
