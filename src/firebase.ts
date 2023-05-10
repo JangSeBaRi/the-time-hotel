@@ -53,4 +53,4 @@ const addData = (collectionName: string, uid: string, data: { [key: string]: str
     return setDoc(doc(db, collectionName, uid), data);
 };
 
-export { signupEmail, signinEmail, auth, updateUserProfile, db, addData };
+export { signupEmail, signinEmail, signoutEmail,  auth, updateUserProfile, db, addData };

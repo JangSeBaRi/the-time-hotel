@@ -8,7 +8,7 @@ const loadingRecoil = atom({
 interface ModalPropsRecoil {
     title: string,
     subTitleList: string[],
-    btnList: {title: string; func: () => void}[]
+    btnList: {title: string; func?: () => void}[]
     
 }
 

@@ -43,7 +43,7 @@ const Modal = () => {
                                         }}
                                         key={btnIdx}
                                         onClick={() => {
-                                            func();
+                                            func && func();
                                             setModalProps(defaultModalProps);
                                         }}
                                     >

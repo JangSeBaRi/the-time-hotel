@@ -95,27 +95,28 @@ const SignUp = () => {
                 });
                 setModalProps({
                     title: "회원가입",
-                    subTitleList: ["축하드립니다. 더 타임 호텔의 관리자가 되셨습니다.", "로그인 해주세요."],
+                    subTitleList: ["성공적으로 회원가입 되었습니다.", "더 타임 호텔에 오신 것을 환영합니다."],
                     btnList: [
                         {
                             title: "확인",
-                            func: () => router.push("/"),
                         },
                     ],
                 });
             } catch (error: any) {
                 if (error.code === "auth/email-already-in-use") {
                     setErrorMsg("이미 가입 된 이메일입니다.");
-                } if (error.code === "auth/invalid-email") {
+                }
+                if (error.code === "auth/invalid-email") {
                     setErrorMsg("이메일이 형식에 맞지않습니다.");
                 } else {
                     alert(error);
                 }
+                setLoading(false);
             }
         } else {
             setErrorMsg(errorMsg);
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     return (
