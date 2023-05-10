@@ -85,7 +85,7 @@ const SignUp = () => {
                 setLoading(false);
                 setModalProps({
                     title: "회원가입",
-                    subTitleList: ["회원가입 되었습니다.", "더 타임 호텔 관리자 계정에 오신것을 환영합니다."],
+                    subTitleList: ["회원가입 되었습니다.", "로그인을 해주세요."],
                     btnList: [
                         {
                             title: "확인",
