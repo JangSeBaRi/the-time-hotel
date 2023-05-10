@@ -1,12 +1,24 @@
 import { signoutEmail } from "@/firebase";
-import { loadingRecoil } from "@/recoil/states";
+import { loadingRecoil, modalPropsRecoil } from "@/recoil/states";
+import { useRouter } from "next/router";
 import { useSetRecoilState } from "recoil";
 
 const HotelList = () => {
-    const setLoading = useSetRecoilState(loadingRecoil);
+    const router = useRouter();
+    const setModalProps = useSetRecoilState(modalPropsRecoil);
+
     const handleSignOut = async () => {
-        setLoading(true);
         await signoutEmail();
+        setModalProps({
+            title: "로그아웃",
+            subTitleList: ["로그아웃 되었습니다.", "감사합니다. 안녕히 가십시오."],
+            btnList: [
+                {
+                    title: "확인",
+                },
+            ],
+        });
+        // await router.push(`/?returnUrl=${router.asPath}`);
     };
     return (
         <a

@@ -1,6 +1,6 @@
 import SelectBox, { selectOption } from "@/components/selectBox";
 import TextInput from "@/components/textInput";
-import { addData, signupEmail, updateUserProfile } from "@/firebase";
+import { addData, signoutEmail, signupEmail, updateUserProfile } from "@/firebase";
 import { loadingRecoil, modalPropsRecoil } from "@/recoil/states";
 import Head from "next/head";
 import Image from "next/image";
@@ -82,6 +82,17 @@ const SignUp = () => {
         if (errorMsg === "") {
             try {
                 const createUser = await signupEmail(email, password);
+                setLoading(false);
+                setModalProps({
+                    title: "회원가입",
+                    subTitleList: ["회원가입 되었습니다.", "더 타임 호텔 관리자 계정에 오신것을 환영합니다."],
+                    btnList: [
+                        {
+                            title: "확인",
+                            // func: () => router.push("/auth/sign-in"),
+                        },
+                    ],
+                });
                 await updateUserProfile({
                     displayName: name,
                     photoURL: `http://gravatar.com/avatar/${uuidv4()}?d=identicon`,
@@ -92,15 +103,6 @@ const SignUp = () => {
                     name,
                     mcType: getMcType()!!,
                     photoURL: createUser.user.photoURL,
-                });
-                setModalProps({
-                    title: "회원가입",
-                    subTitleList: ["성공적으로 회원가입 되었습니다.", "더 타임 호텔에 오신 것을 환영합니다."],
-                    btnList: [
-                        {
-                            title: "확인",
-                        },
-                    ],
                 });
             } catch (error: any) {
                 if (error.code === "auth/email-already-in-use") {
@@ -179,7 +181,7 @@ const SignUp = () => {
                         회원가입
                     </a>
                     <div className="flex mt-[10px] justify-end">
-                        <Link className="text-[10px] text-[#999]" href={"/"}>
+                        <Link className="text-[10px] text-[#999]" href={"/auth/sign-in"}>
                             이전
                         </Link>
                     </div>
