@@ -7,6 +7,7 @@ import { signinEmail } from "@/firebase";
 import { useSetRecoilState } from "recoil";
 import { loadingRecoil, loginPersistRecoil, modalPropsRecoil } from "@/recoil/states";
 import { useRouter } from "next/router";
+import Checkbox, { checkboxItem } from "@/components/checkbox";
 
 const SignIn = () => {
     useEffect(() => {
@@ -32,6 +33,13 @@ const SignIn = () => {
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [checkboxItems, setCheckboxItems] = useState<checkboxItem[]>([
+        {
+            id: "save",
+            label: "아이디 저장",
+            checked: false,
+        },
+    ]);
     const [errorMsg, setErrorMsg] = useState<string>("");
 
     const handleChangeEmail = (v: string) => {
@@ -39,6 +47,15 @@ const SignIn = () => {
     };
     const handleChangePassword = (v: string) => {
         setPassword(v);
+    };
+    const handleChangeCheckboxItems = (id: string, checked: boolean) => {
+        const cpCheckboxItems = JSON.parse(JSON.stringify(checkboxItems));
+        cpCheckboxItems.forEach((cpCheckboxItem: checkboxItem) => {
+            if (cpCheckboxItem.id === id) {
+                cpCheckboxItem.checked = checked;
+            }
+        });
+        setCheckboxItems(cpCheckboxItems);
     };
     const checkValidation = () => {
         setErrorMsg("");
@@ -56,7 +73,7 @@ const SignIn = () => {
         }
         return errorMsg;
     };
-const signIn = async () => {
+    const signIn = async () => {
         setLoading(true);
         const errorMsg = checkValidation();
         if (errorMsg === "") {
@@ -118,6 +135,7 @@ const signIn = async () => {
                         marginTop={10}
                     />
                     {errorMsg && <p className="pl-[13px] text-[10px] text-red-400 mt-1">{errorMsg}</p>}
+                    <Checkbox items={checkboxItems} onChange={handleChangeCheckboxItems} />
                     <a
                         className="mt-[10px] bg-amber-300 text-center rounded-[5px] text-[12px] py-2 hover:bg-amber-400 duration-300 text-[#3A1D1D]"
                         onClick={signIn}
