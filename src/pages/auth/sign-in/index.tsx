@@ -1,19 +1,35 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextInput from "@/components/textInput";
 import Link from "next/link";
 import { signinEmail } from "@/firebase";
 import { useSetRecoilState } from "recoil";
-import { loadingRecoil, modalPropsRecoil } from "@/recoil/states";
+import { loadingRecoil, loginPersistRecoil, modalPropsRecoil } from "@/recoil/states";
 import { useRouter } from "next/router";
 
 const SignIn = () => {
+    useEffect(() => {
+        if (router.query.auth === "signOut") {
+            setLoading(false);
+            setModalProps({
+                title: "로그아웃",
+                subTitleList: ["로그아웃 되었습니다.", "감사합니다. 안녕히 가십시오."],
+                btnList: [
+                    {
+                        title: "확인",
+                    },
+                ],
+            });
+        }
+    }, []);
+
     const router = useRouter();
-    
+
+    const setLogin = useSetRecoilState(loginPersistRecoil);
     const setLoading = useSetRecoilState(loadingRecoil);
     const setModalProps = useSetRecoilState(modalPropsRecoil);
-    
+
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [errorMsg, setErrorMsg] = useState<string>("");
@@ -40,24 +56,14 @@ const SignIn = () => {
         }
         return errorMsg;
     };
-    const signIn = async () => {
+const signIn = async () => {
         setLoading(true);
         const errorMsg = checkValidation();
         if (errorMsg === "") {
             try {
                 await signinEmail(email, password);
-                // await router.push(`/?returnUrl=${router.asPath}`)
-                setLoading(false);
-                setModalProps({
-                    title: "로그인",
-                    subTitleList: ["로그인 되었습니다.", "더 타임 호텔 관리자 계정에 오신것을 환영합니다."],
-                    btnList: [
-                        {
-                            title: "확인",
-                        },
-                    ],
-                })
-                router.push("/hotel-list");
+                setLogin(true);
+                router.replace("/?auth=signIn");
             } catch (error: any) {
                 if (error.code === "auth/user-not-found") {
                     setErrorMsg("가입된 메일이 없습니다. 이메일을 확인해주세요.");

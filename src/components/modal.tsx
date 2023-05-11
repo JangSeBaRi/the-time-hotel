@@ -14,10 +14,10 @@ const Modal = () => {
         <>
             {modalProps.title && (
                 <div className="fixed left-0 top-0 w-full h-screen bg-black/70 flex items-center pb-[25vh] justify-center select-none z-[99999]">
-                    <div className=" max-w-[350px] w-full bg-white rounded-[5px] mx-[15px] p-[20px] flex flex-col items-center relative animate-modalFadeIn">
+                    <div className=" max-w-[300px] w-full bg-white rounded-[5px] mx-[20px] px-[20px] py-[30px] flex flex-col items-center relative animate-modalFadeIn">
                         <div className=" w-[50px] h-[50px] bg-white rounded-full absolute left-[50%] translate-x-[-50%] top-[-25px]"></div>
-                        <div className=" w-[44px] h-[44px] bg-amber-300 rounded-full absolute left-[50%] translate-x-[-50%] top-[-22px] bg-[url('/static/images/logo.png')] bg-cover" />
-                        <p className=" text-[20px] font-bold mt-2">{modalProps.title}</p>
+                        <div className=" w-[44px] h-[44px] bg-amber-100 rounded-full absolute left-[50%] translate-x-[-50%] top-[-22px] bg-[url('/static/images/logo.png')] bg-cover" />
+                        <p className=" text-[20px] font-bold">{modalProps.title}</p>
                         <div className="mt-2">
                             {modalProps.subTitleList.map((subTitle, subTitleIdx) => {
                                 return (
@@ -43,8 +43,8 @@ const Modal = () => {
                                         }}
                                         key={btnIdx}
                                         onClick={() => {
-                                            func && func();
                                             setModalProps(defaultModalProps);
+                                            func && func();
                                         }}
                                     >
                                         {title}

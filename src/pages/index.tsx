@@ -1,24 +1,31 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect } from "react";
-import { auth } from "@/firebase";
 import { useRouter } from "next/router";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { loadingRecoil, modalPropsRecoil } from "@/recoil/states";
+import { useRecoilValue } from "recoil";
+import { loadingRecoil, loginPersistRecoil } from "@/recoil/states";
 
 const Home = () => {
     const router = useRouter();
-    const setModalProps = useSetRecoilState(modalPropsRecoil);
     const loading = useRecoilValue(loadingRecoil);
+    const login = useRecoilValue(loginPersistRecoil);
 
     useEffect(() => {
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                router.push("/hotel-list");
+        setTimeout(() => {
+            if (login) {
+                if (router.query.auth === "signIn") {
+                    router.replace("/hotel-list/?auth=signIn");
+                } else {
+                    router.replace("/hotel-list");
+                }
             } else {
-                router.push("/auth/sign-in");
+                if (router.query.auth === "signOut") {
+                    router.replace("/auth/sign-in/?auth=signOut");
+                } else {
+                    router.replace("/auth/sign-in");
+                }
             }
-        });
+        }, 2000);
     }, []);
 
     return (
@@ -28,9 +35,12 @@ const Home = () => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="fixed left-0 top-0 w-full h-screen bg-black/70 flex items-center pb-[25vh] justify-center select-none z-[99999]">
-                <Image src="/static/images/loading.gif" alt="loading" width={80} height={80} priority={true} />
-            </div>
+            <div className=" fixed left-0 top-0 w-full h-screen bg-white" />
+            {!loading && (
+                <div className="fixed left-0 top-0 w-full h-screen bg-black/70 flex items-center pb-[25vh] justify-center select-none z-[99999]">
+                    <Image src="/static/images/loading.gif" alt="loading" width={80} height={80} priority={true} />
+                </div>
+            )}
         </>
     );
 };

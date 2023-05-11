@@ -82,17 +82,6 @@ const SignUp = () => {
         if (errorMsg === "") {
             try {
                 const createUser = await signupEmail(email, password);
-                setLoading(false);
-                setModalProps({
-                    title: "회원가입",
-                    subTitleList: ["회원가입 되었습니다.", "로그인을 해주세요."],
-                    btnList: [
-                        {
-                            title: "확인",
-                            func: () => router.push("/auth/sign-in"),
-                        },
-                    ],
-                });
                 await updateUserProfile({
                     displayName: name,
                     photoURL: `http://gravatar.com/avatar/${uuidv4()}?d=identicon`,
@@ -103,6 +92,18 @@ const SignUp = () => {
                     name,
                     mcType: getMcType()!!,
                     photoURL: createUser.user.photoURL,
+                });
+                await signoutEmail();
+                setLoading(false);
+                setModalProps({
+                    title: "회원가입",
+                    subTitleList: ["회원가입 되었습니다.", "로그인을 해주세요."],
+                    btnList: [
+                        {
+                            title: "확인",
+                            func: () => router.push("/auth/sign-in"),
+                        },
+                    ],
                 });
             } catch (error: any) {
                 if (error.code === "auth/email-already-in-use") {

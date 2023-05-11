@@ -9,9 +9,9 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <>
             <RecoilRoot>
-                <Loading/>
-                <Modal/>
-                <NextNProgress color="#fcd34d" startPosition={0.1} stopDelayMs={200} height={3} showOnShallow={true} />
+                <Loading />
+                <Modal />
+                <NextNProgress color="#fcd34d" startPosition={0.1} stopDelayMs={200} height={5} showOnShallow={true} />
                 <Component {...pageProps} />
             </RecoilRoot>
         </>
