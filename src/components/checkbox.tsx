@@ -21,7 +21,14 @@ const Checkbox = ({ items, onChange }: Props) => {
                 const { id, label, checked } = item;
                 return (
                     <div key={id} className="flex items-center mt-[10px]">
-                        <input type="checkbox" name={name} id={`${name}_${id}`} checked={checked} className="hidden" />
+                        <input
+                            type="checkbox"
+                            name={name}
+                            id={`${name}_${id}`}
+                            checked={checked}
+                            className="hidden"
+                            onChange={() => {}}
+                        />
                         <div className="flex items-center" onClick={() => onChange(id, !checked)}>
                             <a
                                 className="w-[19px] h-[19px] relative rounded-[3px] border-[2px]"
