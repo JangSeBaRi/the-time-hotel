@@ -4,8 +4,14 @@ import { useEffect, useState } from "react";
 import TextInput from "@/components/textInput";
 import Link from "next/link";
 import { signinEmail } from "@/firebase";
-import { useSetRecoilState } from "recoil";
-import { loadingRecoil, loginPersistRecoil, modalPropsRecoil } from "@/recoil/states";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+    loadingRecoil,
+    loginPersistRecoil,
+    modalPropsRecoil,
+    savedEmailPersistRecoil,
+    saveEmailPersistRecoil,
+} from "@/recoil/states";
 import { useRouter } from "next/router";
 import Checkbox, { checkboxItem } from "@/components/checkbox";
 
@@ -27,17 +33,19 @@ const SignIn = () => {
 
     const router = useRouter();
 
+    const [saveEmail, setSaveEmail] = useRecoilState(saveEmailPersistRecoil);
+    const [savedEmail, setSavedEmail] = useRecoilState(savedEmailPersistRecoil);
     const setLogin = useSetRecoilState(loginPersistRecoil);
     const setLoading = useSetRecoilState(loadingRecoil);
     const setModalProps = useSetRecoilState(modalPropsRecoil);
 
-    const [email, setEmail] = useState<string>("");
+    const [email, setEmail] = useState<string>(savedEmail);
     const [password, setPassword] = useState<string>("");
     const [checkboxItems, setCheckboxItems] = useState<checkboxItem[]>([
         {
             id: "save",
-            label: "아이디 저장",
-            checked: false,
+            label: "이메일저장",
+            checked: saveEmail,
         },
     ]);
     const [errorMsg, setErrorMsg] = useState<string>("");
@@ -55,6 +63,7 @@ const SignIn = () => {
                 cpCheckboxItem.checked = checked;
             }
         });
+        setSaveEmail(checked);
         setCheckboxItems(cpCheckboxItems);
     };
     const checkValidation = () => {
@@ -81,6 +90,11 @@ const SignIn = () => {
                 await signinEmail(email, password);
                 setLogin(true);
                 router.replace("/?auth=signIn");
+                if (saveEmail) {
+                    setSavedEmail(email);
+                } else {
+                    setSavedEmail("");
+                }
             } catch (error: any) {
                 if (error.code === "auth/user-not-found") {
                     setErrorMsg("가입된 메일이 없습니다. 이메일을 확인해주세요.");
@@ -137,7 +151,8 @@ const SignIn = () => {
                     {errorMsg && <p className="pl-[13px] text-[10px] text-red-400 mt-1">{errorMsg}</p>}
                     <Checkbox items={checkboxItems} onChange={handleChangeCheckboxItems} />
                     <a
-                        className="mt-[10px] bg-amber-300 text-center rounded-[5px] text-[12px] py-2 hover:bg-amber-400 duration-300 text-[#3A1D1D]"
+                        className="mt-[10px] bg-amber-300 text-center rounded-[5px] text-[12px] py-2 hover:bg-amber-400 duration-300 text-[#3A1D1D] font-semibold
+                        "
                         onClick={signIn}
                     >
                         로그인

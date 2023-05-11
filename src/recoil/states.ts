@@ -9,6 +9,18 @@ const loginPersistRecoil = atom<boolean>({
     effects_UNSTABLE: [persistAtom],
 });
 
+const saveEmailPersistRecoil = atom<boolean>({
+    key: "saveEmailPersistRecoil",
+    default: false,
+    effects_UNSTABLE: [persistAtom],
+});
+
+const savedEmailPersistRecoil = atom<string>({
+    key: "savedEmailPersistRecoil",
+    default: "",
+    effects_UNSTABLE: [persistAtom],
+});
+
 const loadingRecoil = atom<boolean>({
     key: "loadingRecoil",
     default: false,
@@ -29,4 +41,4 @@ const modalPropsRecoil = atom<ModalPropsRecoil>({
     },
 });
 
-export { loginPersistRecoil, loadingRecoil, modalPropsRecoil };
+export { loginPersistRecoil, saveEmailPersistRecoil, savedEmailPersistRecoil, loadingRecoil, modalPropsRecoil };

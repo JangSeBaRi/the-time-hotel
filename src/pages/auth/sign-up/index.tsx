@@ -131,7 +131,7 @@ const SignUp = () => {
             </Head>
             <header className=" fixed w-full z-[1]">
                 <div className="pt-[15px] pl-[15px]">
-                    <Link className="w-[180px] inline-block" href="/">
+                    <Link className="w-[180px] inline-block" href="/auth/sign-in">
                         <Image
                             src="/static/images/title.webp"
                             alt=""
@@ -176,7 +176,7 @@ const SignUp = () => {
                     />
                     {errorMsg && <p className="pl-[13px] text-[10px] text-red-400 mt-1">{errorMsg}</p>}
                     <a
-                        className="mt-[10px] bg-amber-300 text-center rounded-[5px] text-[12px] py-2 hover:bg-amber-400 duration-300 text-[#3A1D1D]"
+                        className="mt-[10px] bg-amber-300 text-center rounded-[5px] text-[12px] py-2 hover:bg-amber-400 duration-300 text-[#3A1D1D] font-semibold"
                         onClick={signUp}
                     >
                         회원가입

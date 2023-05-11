@@ -38,7 +38,7 @@ const Checkbox = ({ items, onChange }: Props) => {
                                     }}
                                 />
                                 <div
-                                    className="relative z-[1] h-[12px] overflow-hidden left-[2px] top-[1.5px] duration-300 delay-300"
+                                    className="relative z-[1] h-[12px] overflow-hidden left-[2px] top-[1px] duration-300 delay-300"
                                     style={{
                                         width: checked ? 12 : 0,
                                         transition: "width 0.2s",
@@ -52,7 +52,7 @@ const Checkbox = ({ items, onChange }: Props) => {
                             </a>
                             <label
                                 htmlFor={`${name}_${id}`}
-                                className="select-none text-[11px] cursor-pointer pl-[5px]"
+                                className="select-none text-[10px] cursor-pointer pl-[5px] text-[#333]"
                             >
                                 {label}
                             </label>
