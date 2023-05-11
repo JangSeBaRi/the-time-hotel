@@ -9,7 +9,7 @@ const Loading = () => {
         <>
             <div
                 className="fixed left-0 top-0 w-full h-screen bg-black/70 flex items-center pb-[25vh] justify-center select-none"
-                style={{ opacity: loading ? 1 : 0, zIndex: loading ? 99999 : -1 }}
+                style={{ opacity: loading ? 1 : 0, zIndex: loading ? 100 : -1 }}
             >
                 <Image src="/static/images/loading.gif" alt="loading" width={80} height={80} priority={true} />
             </div>

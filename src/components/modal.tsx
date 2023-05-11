@@ -13,7 +13,7 @@ const Modal = () => {
     return (
         <>
             {modalProps.title && (
-                <div className="fixed left-0 top-0 w-full h-screen bg-black/70 flex items-center pb-[25vh] justify-center select-none z-[99999]">
+                <div className="fixed left-0 top-0 w-full h-screen bg-black/70 flex items-center pb-[25vh] justify-center select-none z-[100]">
                     <div className=" max-w-[300px] w-full bg-white rounded-[5px] mx-[20px] px-[20px] py-[30px] flex flex-col items-center relative animate-modalFadeIn">
                         <div className=" w-[50px] h-[50px] bg-white rounded-full absolute left-[50%] translate-x-[-50%] top-[-25px]"></div>
                         <div className=" w-[44px] h-[44px] bg-amber-100 rounded-full absolute left-[50%] translate-x-[-50%] top-[-22px] bg-[url('/static/images/logo.png')] bg-cover" />

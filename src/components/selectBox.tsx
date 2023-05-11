@@ -44,17 +44,17 @@ const SelectBox = ({ selectBoxLabel, selectOptions, onChange, marginTop }: Props
                 {openSelectBox && (
                     <div
                         id="bottom_modal_background"
-                        className="fixed left-0 top-0 w-full h-screen bg-black/70 z-[999]"
+                        className="fixed left-0 top-0 w-full h-screen bg-black/70 z-[100]"
                         onClick={() => setOpenSelectBox(false)}
                     />
                 )}
                 <div
                     id="bottom_modal_wrap"
-                    className="fixed left-0 bg-white w-full h-[25vh] rounded-tl-2xl rounded-tr-2xl border-t-[1px] z-[1000] duration-300"
+                    className="fixed left-0 bg-white w-full h-[25vh] rounded-tl-2xl rounded-tr-2xl border-t-[1px] z-[100] duration-300"
                     style={{ bottom: openSelectBox ? -2 : "-25vh" }}
                 >
                     <div className="relative">
-                        <div className="absolute top-0 left-[16px] bg-white flex items-center justify-center w-[calc(100vw-32px)] h-[16px] z-[1]">
+                        <div className="absolute top-0 left-[16px] bg-white flex items-center justify-center w-[calc(100vw-32px)] h-[16px]">
                             <div className="w-[35px] h-[3px] bg-[#ccc] rounded-full" />
                         </div>
                         <ul className="relative max-w-[450px] mx-auto h-[25vh] py-5 px-8 overflow-y-scroll hide-scroll-bar">

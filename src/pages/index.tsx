@@ -25,7 +25,7 @@ const Home = () => {
                     router.replace("/auth/sign-in");
                 }
             }
-        }, 2000);
+        }, 1000);
     }, []);
 
     return (
@@ -37,7 +37,7 @@ const Home = () => {
             </Head>
             <div className=" fixed left-0 top-0 w-full h-screen bg-white" />
             {!loading && (
-                <div className="fixed left-0 top-0 w-full h-screen bg-black/70 flex items-center pb-[25vh] justify-center select-none z-[99999]">
+                <div className="fixed left-0 top-0 w-full h-screen bg-black/70 flex items-center pb-[25vh] justify-center select-none z-[100]">
                     <Image src="/static/images/loading.gif" alt="loading" width={80} height={80} priority={true} />
                 </div>
             )}
