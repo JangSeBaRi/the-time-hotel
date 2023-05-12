@@ -1,9 +1,9 @@
 {
-  "name": "가마-ERP",
-  "short_name": "가마-ERP",
+  "name": "더타임호텔",
+  "short_name": "더타임호텔",
   "lang": "ko-KR",
   "theme_color": "#ffffff",
-  "background_color": "#5048E5",
+  "background_color": "#ffffff",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "./",
