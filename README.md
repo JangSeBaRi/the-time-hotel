@@ -10,4 +10,4 @@
 
 ### Deploy
 
-https://vercel.com/jangsebari/the-time-hotel
+https://the-time-hotel.vercel.app/
