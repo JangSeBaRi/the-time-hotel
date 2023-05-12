@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import Checkbox, { checkboxItem } from "@/components/checkbox";
 
 const SignIn = () => {
+
     useEffect(() => {
         if (router.query.auth === "signOut") {
             setLoading(false);

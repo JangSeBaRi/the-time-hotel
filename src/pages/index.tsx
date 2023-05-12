@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import { loadingRecoil, loginPersistRecoil } from "@/recoil/states";
+import { delay } from "@/utils/delay";
 
 const Home = () => {
     const router = useRouter();
@@ -11,7 +12,8 @@ const Home = () => {
     const login = useRecoilValue(loginPersistRecoil);
 
     useEffect(() => {
-        setTimeout(() => {
+        (async () => {
+            await delay(1000);
             if (login) {
                 if (router.query.auth === "signIn") {
                     router.push("/hotel-list/?auth=signIn");
@@ -25,7 +27,7 @@ const Home = () => {
                     router.push("/auth/sign-in");
                 }
             }
-        }, 1000);
+        })();
     }, []);
 
     return (
