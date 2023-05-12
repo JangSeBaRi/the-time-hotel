@@ -11,6 +11,21 @@ const HotelList = () => {
     const setModalProps = useSetRecoilState(modalPropsRecoil);
 
     useEffect(() => {
+        router.beforePopState(({ url, as, options }) => {
+            if (as === "/auth/sign-up") {
+                window.history.pushState(null, "");
+                router.push("/hotel-list");
+                return false;
+            } else {
+                return true;
+            }
+        });
+        return () => {
+            router.beforePopState(() => true);
+        };
+    }, [router]);
+
+    useEffect(() => {
         if (router.query.auth === "signIn") {
             setLoading(false);
             setModalProps({

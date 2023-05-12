@@ -33,22 +33,55 @@ const SignIn = () => {
 
     const router = useRouter();
 
+    // useEffect(() => {
+    //     router.beforePopState(({ url, as, options }) => {
+    //         window.history.pushState(null, "");
+    //         router.push("/auth/sign-in");
+    //         return false;
+    //     });
+    //     return () => {
+    //         router.beforePopState(() => true);
+    //     };
+    // }, [router]);
+
+    useEffect(() => {
+        const handlePopstate = () => {
+            window.history.forward()
+        }
+        window.addEventListener('popstate', handlePopstate)
+        return () => {
+            window.removeEventListener('popstate', handlePopstate)
+        }
+    }, []);
+
     const [saveEmail, setSaveEmail] = useRecoilState(saveEmailPersistRecoil);
     const [savedEmail, setSavedEmail] = useRecoilState(savedEmailPersistRecoil);
     const setLogin = useSetRecoilState(loginPersistRecoil);
     const setLoading = useSetRecoilState(loadingRecoil);
     const setModalProps = useSetRecoilState(modalPropsRecoil);
 
-    const [email, setEmail] = useState<string>(savedEmail);
+    const [email, setEmail] = useState<string>("");
+
     const [password, setPassword] = useState<string>("");
     const [checkboxItems, setCheckboxItems] = useState<checkboxItem[]>([
         {
             id: "save",
             label: "이메일저장",
-            checked: saveEmail,
+            checked: false,
         },
     ]);
     const [errorMsg, setErrorMsg] = useState<string>("");
+
+    useEffect(() => {
+        setCheckboxItems([
+            {
+                id: "save",
+                label: "이메일저장",
+                checked: saveEmail,
+            },
+        ]);
+        setEmail(savedEmail);
+    }, []);
 
     const handleChangeEmail = (v: string) => {
         setEmail(v);
@@ -149,7 +182,7 @@ const SignIn = () => {
                         marginTop={10}
                     />
                     {errorMsg && <p className="pl-[13px] text-[10px] text-red-400 mt-1">{errorMsg}</p>}
-                    <Checkbox items={checkboxItems} onChange={handleChangeCheckboxItems} />
+                    <Checkbox items={checkboxItems} onChange={handleChangeCheckboxItems} name="saveEmail" />
                     <a
                         className="mt-[10px] bg-amber-300 text-center rounded-[5px] text-[12px] py-2 hover:bg-amber-400 duration-300 text-[#3A1D1D] font-semibold
                         "

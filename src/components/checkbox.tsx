@@ -11,10 +11,10 @@ export interface checkboxItem {
 interface Props {
     items: checkboxItem[];
     onChange: (id: string, checked: boolean) => void;
+    name : string;
 }
 
-const Checkbox = ({ items, onChange }: Props) => {
-    const name = uuidv4();
+const Checkbox = ({ items, onChange, name }: Props) => {
     return (
         <div>
             {items.map((item) => {
