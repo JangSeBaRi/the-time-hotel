@@ -12,13 +12,9 @@ const HotelList = () => {
 
     useEffect(() => {
         router.beforePopState(({ url, as, options }) => {
-            if (as === "/auth/sign-up") {
-                window.history.pushState(null, "");
-                router.push("/hotel-list");
-                return false;
-            } else {
-                return true;
-            }
+            window.history.pushState(null, "");
+            router.push("/hotel-list");
+            return false;
         });
         return () => {
             router.beforePopState(() => true);
@@ -44,7 +40,7 @@ const HotelList = () => {
         setLoading(true);
         await signoutEmail();
         setLogin(false);
-        router.replace(`/?auth=signOut`);
+        router.push(`/?auth=signOut`);
     };
 
     const handleClickSignOut = () => {

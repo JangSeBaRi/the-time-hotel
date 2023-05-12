@@ -34,25 +34,25 @@ const SignIn = () => {
     const router = useRouter();
 
     // useEffect(() => {
-    //     router.beforePopState(({ url, as, options }) => {
-    //         window.history.pushState(null, "");
-    //         router.push("/auth/sign-in");
-    //         return false;
-    //     });
+    //     const handlePopstate = () => {
+    //         window.history.forward()
+    //     }
+    //     window.addEventListener('popstate', handlePopstate)
     //     return () => {
-    //         router.beforePopState(() => true);
-    //     };
-    // }, [router]);
+    //         window.removeEventListener('popstate', handlePopstate)
+    //     }
+    // }, []);
 
     useEffect(() => {
-        const handlePopstate = () => {
-            window.history.forward()
-        }
-        window.addEventListener('popstate', handlePopstate)
+        router.beforePopState(({ url, as, options }) => {
+            window.history.pushState(null, "");
+            router.push("/auth/sign-in");
+            return false;
+        });
         return () => {
-            window.removeEventListener('popstate', handlePopstate)
-        }
-    }, []);
+            router.beforePopState(() => true);
+        };
+    }, [router]);
 
     const [saveEmail, setSaveEmail] = useRecoilState(saveEmailPersistRecoil);
     const [savedEmail, setSavedEmail] = useRecoilState(savedEmailPersistRecoil);
@@ -122,7 +122,7 @@ const SignIn = () => {
             try {
                 await signinEmail(email, password);
                 setLogin(true);
-                router.replace("/?auth=signIn");
+                router.push("/?auth=signIn");
                 if (saveEmail) {
                     setSavedEmail(email);
                 } else {

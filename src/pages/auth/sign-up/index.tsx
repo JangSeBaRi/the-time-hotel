@@ -5,7 +5,7 @@ import { loadingRecoil, modalPropsRecoil } from "@/recoil/states";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
@@ -14,6 +14,17 @@ const SignUp = () => {
     const setLoading = useSetRecoilState(loadingRecoil);
     const setModalProps = useSetRecoilState(modalPropsRecoil);
     const router = useRouter();
+
+    useEffect(() => {
+        router.beforePopState(({ url, as, options }) => {
+            window.history.pushState(null, "");
+            router.push("/auth/sign-in");
+            return false;
+        });
+        return () => {
+            router.beforePopState(() => true);
+        };
+    }, [router]);
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");

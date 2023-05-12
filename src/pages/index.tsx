@@ -14,15 +14,15 @@ const Home = () => {
         setTimeout(() => {
             if (login) {
                 if (router.query.auth === "signIn") {
-                    router.replace("/hotel-list/?auth=signIn");
+                    router.push("/hotel-list/?auth=signIn");
                 } else {
-                    router.replace("/hotel-list");
+                    router.push("/hotel-list");
                 }
             } else {
                 if (router.query.auth === "signOut") {
-                    router.replace("/auth/sign-in/?auth=signOut");
+                    router.push("/auth/sign-in/?auth=signOut");
                 } else {
-                    router.replace("/auth/sign-in");
+                    router.push("/auth/sign-in");
                 }
             }
         }, 1000);
