@@ -8,7 +8,19 @@ import {
     signOut, //email 회원가입
     updateProfile, // 회원 정보 수정
 } from "firebase/auth";
-import { doc, setDoc, getFirestore } from "firebase/firestore";
+import { doc, setDoc, getFirestore, updateDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+// Raw string is the default if no format is provided
+
+const uploadImageAndGetDownloadUrl = async (userUid: string, file: any) => {
+    const storage = getStorage();
+    const message = "This is my message.";
+    const storageRef = ref(storage, `user_image/${userUid}`);
+    const response = await uploadBytes(storageRef, file);
+    const downloadUrl = await getDownloadURL(response.ref);
+    return downloadUrl;
+};
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -44,7 +56,7 @@ const signinEmail = (email: string, password: string) => {
 };
 
 //사용자 프로필 변경
-const updateUserProfile = (obj: { displayName: string; photoURL: string }) => {
+const updateUserProfile = (obj: { displayName?: string; photoURL?: string }) => {
     return updateProfile(auth.currentUser!!, obj);
 };
 
@@ -52,5 +64,19 @@ const updateUserProfile = (obj: { displayName: string; photoURL: string }) => {
 const addData = (collectionName: string, uid: string, data: { [key: string]: string | null }) => {
     return setDoc(doc(db, collectionName, uid), data);
 };
+//db 데이터 수정
+const updateData = (collectionName: string, uid: string, data: { [key: string]: string | null }) => {
+    return updateDoc(doc(db, collectionName, uid), data);
+};
 
-export { signupEmail, signinEmail, signoutEmail,  auth, updateUserProfile, db, addData };
+export {
+    signupEmail,
+    signinEmail,
+    signoutEmail,
+    auth,
+    updateUserProfile,
+    db,
+    addData,
+    updateData,
+    uploadImageAndGetDownloadUrl,
+};

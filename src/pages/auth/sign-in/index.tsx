@@ -7,7 +7,7 @@ import { signinEmail } from "@/firebase";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
     loadingRecoil,
-    loginPersistRecoil,
+    userPersistRecoil,
     modalPropsRecoil,
     savedEmailPersistRecoil,
     saveEmailPersistRecoil,
@@ -16,7 +16,6 @@ import { useRouter } from "next/router";
 import Checkbox, { checkboxItem } from "@/components/checkbox";
 
 const SignIn = () => {
-
     useEffect(() => {
         if (router.query.auth === "signOut") {
             setLoading(false);
@@ -57,7 +56,7 @@ const SignIn = () => {
 
     const [saveEmail, setSaveEmail] = useRecoilState(saveEmailPersistRecoil);
     const [savedEmail, setSavedEmail] = useRecoilState(savedEmailPersistRecoil);
-    const setLogin = useSetRecoilState(loginPersistRecoil);
+    const setUser = useSetRecoilState(userPersistRecoil);
     const setLoading = useSetRecoilState(loadingRecoil);
     const setModalProps = useSetRecoilState(modalPropsRecoil);
 
@@ -121,8 +120,13 @@ const SignIn = () => {
         const errorMsg = checkValidation();
         if (errorMsg === "") {
             try {
-                await signinEmail(email, password);
-                setLogin(true);
+                const currentUser = await signinEmail(email, password);
+                const { uid, photoURL, displayName } = currentUser.user;
+                setUser({
+                    uid,
+                    photoURL,
+                    displayName,
+                });
                 router.push("/?auth=signIn");
                 if (saveEmail) {
                     setSavedEmail(email);
@@ -150,7 +154,10 @@ const SignIn = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="w-full h-screen flex flex-col items-center justify-center pb-[25vh] px-5 duration-150">
-                <div className=" bg-white p-7 rounded-xl flex flex-col w-full max-w-[450px] 300px:p-10">
+                <div
+                    className=" bg-white p-7 rounded-xl flex flex-col w-full max-w-[450px] 300px:p-10"
+                    style={{ boxShadow: "0 15px 25px rgba(0,0,0,.6)" }}
+                >
                     <div className="flex items-center justify-center">
                         <div className="w-[250px]">
                             <Image

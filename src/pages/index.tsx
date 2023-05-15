@@ -3,28 +3,28 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
-import { loadingRecoil, loginPersistRecoil } from "@/recoil/states";
+import { loadingRecoil, userPersistRecoil } from "@/recoil/states";
 import { delay } from "@/utils/delay";
 
 const Home = () => {
     const router = useRouter();
     const loading = useRecoilValue(loadingRecoil);
-    const login = useRecoilValue(loginPersistRecoil);
+    const user = useRecoilValue(userPersistRecoil);
 
     useEffect(() => {
         (async () => {
             await delay(1000);
-            if (login) {
+            if (user.uid) {
                 if (router.query.auth === "signIn") {
-                    router.push("/hotel-list/?auth=signIn");
+                    router.push("/hotel-list/?auth=signIn", undefined, { shallow: true });
                 } else {
-                    router.push("/hotel-list");
+                    router.push("/hotel-list", undefined, { shallow: true });
                 }
             } else {
                 if (router.query.auth === "signOut") {
-                    router.push("/auth/sign-in/?auth=signOut");
+                    router.push("/auth/sign-in/?auth=signOut", undefined, { shallow: true });
                 } else {
-                    router.push("/auth/sign-in");
+                    router.push("/auth/sign-in", undefined, { shallow: true });
                 }
             }
         })();

@@ -156,7 +156,10 @@ const SignUp = () => {
                 </div>
             </header>
             <div className=" w-full h-screen flex flex-col items-center justify-center pb-[25vh] px-5 duration-150">
-                <div className=" bg-white p-10 rounded-xl flex flex-col w-full max-w-[550px] relative z-[1]">
+                <div
+                    className=" bg-white p-10 rounded-xl flex flex-col w-full max-w-[550px] relative z-[1]"
+                    style={{ boxShadow: "0 15px 25px rgba(0,0,0,.6)" }}
+                >
                     <TextInput inputType="email" label="이메일" value={email} onChange={handleChangeId} />
                     <div className="flex flex-wrap gap-1">
                         <div className="grow basis-0 min-w-[150px]">

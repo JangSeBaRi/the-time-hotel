@@ -3,9 +3,13 @@ import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();
 
-const loginPersistRecoil = atom<boolean>({
-    key: "loginPersistRecoil",
-    default: false,
+const userPersistRecoil = atom<{ uid: string; photoURL: string | null; displayName: string | null }>({
+    key: "userPersistRecoil",
+    default: {
+        uid: "",
+        photoURL: "",
+        displayName: "",
+    },
     effects_UNSTABLE: [persistAtom],
 });
 
@@ -41,4 +45,4 @@ const modalPropsRecoil = atom<ModalPropsRecoil>({
     },
 });
 
-export { loginPersistRecoil, saveEmailPersistRecoil, savedEmailPersistRecoil, loadingRecoil, modalPropsRecoil };
+export { userPersistRecoil, saveEmailPersistRecoil, savedEmailPersistRecoil, loadingRecoil, modalPropsRecoil };
